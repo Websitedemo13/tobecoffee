@@ -141,6 +141,47 @@ const Index = () => (
       </div>
     </section>
 
+    {/* SẢN PHẨM NỔI BẬT */}
+    <section className="py-20 bg-secondary/30">
+      <div className="container mx-auto px-4">
+        <h2 className="font-heading text-2xl md:text-3xl font-bold text-center mb-4 uppercase tracking-wider">
+          Sản phẩm nổi bật
+        </h2>
+        <p className="font-body text-muted-foreground text-center mb-12">Brew Bold. Be TOBE. — 100% Coffee Viet Nam</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredProducts.map((p) => (
+            <Link
+              key={p.name}
+              to="/product"
+              className="bg-card border border-border rounded-sm overflow-hidden group hover:shadow-xl transition-shadow"
+            >
+              <div className="aspect-square overflow-hidden bg-secondary">
+                <img
+                  src={p.img}
+                  alt={p.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-5 text-center">
+                <h3 className="font-heading text-base font-bold mb-1">{p.name}</h3>
+                <p className="font-body text-xs text-muted-foreground mb-2">{p.desc}</p>
+                <p className="font-body text-lg font-semibold text-primary">{p.price}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="text-center mt-10">
+          <Link
+            to="/product"
+            className="inline-block bg-primary text-primary-foreground font-body font-semibold px-8 py-3 rounded-sm uppercase tracking-wider text-sm hover:bg-primary/90 transition-colors"
+          >
+            Xem tất cả sản phẩm
+          </Link>
+        </div>
+      </div>
+    </section>
+
     {/* Stats */}
     <section className="relative py-24 overflow-hidden">
       <img
