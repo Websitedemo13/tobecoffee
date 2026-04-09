@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import tobeLogo from "@/assets/tobe-logo.jpg";
+import tobeLogo from "@/assets/tobe-logo.png";
 
 const navLinks = [
   { to: "/", label: "Trang chủ" },
