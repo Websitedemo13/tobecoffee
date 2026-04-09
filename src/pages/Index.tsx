@@ -6,9 +6,6 @@ import statsBg from "@/assets/stats-bg.jpg";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
-import catDripBag from "@/assets/cat-drip-bag.jpg";
-import catRoasted from "@/assets/cat-roasted.jpg";
-import catMenu from "@/assets/cat-menu.jpg";
 import productPulseBold from "@/assets/product-pulse-bold.jpg";
 import productPauseDrip from "@/assets/product-pause-drip.jpg";
 import productBrewBold from "@/assets/product-brew-bold.jpg";
@@ -99,13 +96,13 @@ const Index = () => (
       </div>
     </section>
 
-    {/* DANH MỤC SẢN PHẨM */}
+    {/* DANH MỤC SẢN PHẨM - 6 cards (3x2) */}
     <section className="py-20">
       <div className="container mx-auto px-4">
         <h2 className="font-heading text-2xl md:text-3xl font-bold text-center mb-12 uppercase tracking-wider">
           Danh mục sản phẩm
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {productCategories.map((cat) => (
             <Link
               key={cat.title}
@@ -117,61 +114,18 @@ const Index = () => (
                 alt={cat.title}
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
-                width={800}
-                height={700}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 z-10">
-                <p className="font-body text-xs font-semibold text-primary-foreground/70 uppercase tracking-widest mb-1">
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/10 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-5 z-10">
+                <p className="font-body text-[10px] font-semibold text-primary-foreground/70 uppercase tracking-widest mb-1">
                   {cat.label}
                 </p>
-                <h3 className="font-heading text-lg md:text-xl font-bold text-primary-foreground leading-snug whitespace-pre-line">
+                <h3 className="font-heading text-base md:text-lg font-bold text-primary-foreground leading-snug whitespace-pre-line">
                   {cat.title}
                 </h3>
               </div>
             </Link>
           ))}
-        </div>
-      </div>
-    </section>
-
-    {/* SẢN PHẨM NỔI BẬT */}
-    <section className="py-20 bg-secondary/30">
-      <div className="container mx-auto px-4">
-        <h2 className="font-heading text-2xl md:text-3xl font-bold text-center mb-4 uppercase tracking-wider">
-          Sản phẩm nổi bật
-        </h2>
-        <p className="font-body text-muted-foreground text-center mb-12">Brew Bold. Be TOBE. — 100% Coffee Viet Nam</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProducts.map((p) => (
-            <Link
-              key={p.name}
-              to="/product"
-              className="bg-card border border-border rounded-sm overflow-hidden group hover:shadow-xl transition-shadow"
-            >
-              <div className="aspect-square overflow-hidden bg-secondary">
-                <img
-                  src={p.img}
-                  alt={p.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-5 text-center">
-                <h3 className="font-heading text-base font-bold mb-1">{p.name}</h3>
-                <p className="font-body text-xs text-muted-foreground mb-2">{p.desc}</p>
-                <p className="font-body text-lg font-semibold text-primary">{p.price}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-        <div className="text-center mt-10">
-          <Link
-            to="/product"
-            className="inline-block bg-primary text-primary-foreground font-body font-semibold px-8 py-3 rounded-sm uppercase tracking-wider text-sm hover:bg-primary/90 transition-colors"
-          >
-            Xem tất cả sản phẩm
-          </Link>
         </div>
       </div>
     </section>
