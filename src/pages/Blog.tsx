@@ -10,8 +10,6 @@ const posts = [
   { id: 6, title: "TOBE ra mắt dòng sản phẩm mới 2026", excerpt: "Cập nhật các sản phẩm mới nhất từ TOBE Coffee trong năm 2026.", date: "2026-01-15", topic: "Tin TOBE" },
 ];
 
-const topics = ["Cách pha Cold Brew tại nhà", "Cà phê và Sức khỏe", "Xu hướng cà phê 2026", "Khám phá vùng nguyên liệu"];
-
 const Blog = () => (
   <Layout>
     <section className="bg-foreground text-primary-foreground py-20">
@@ -22,9 +20,8 @@ const Blog = () => (
     </section>
 
     <section className="py-16">
-      <div className="container mx-auto px-4 flex flex-col lg:flex-row gap-12">
-        {/* Posts */}
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((p) => (
             <article key={p.id} className="bg-card border border-border rounded-sm overflow-hidden group hover:shadow-lg transition-shadow">
               <div className="aspect-video bg-secondary flex items-center justify-center">
@@ -41,22 +38,6 @@ const Blog = () => (
             </article>
           ))}
         </div>
-
-        {/* Sidebar */}
-        <aside className="lg:w-72 shrink-0">
-          <div className="sticky top-24">
-            <h3 className="font-heading text-lg font-bold mb-4">Chủ đề nổi bật</h3>
-            <ul className="space-y-3">
-              {topics.map((t) => (
-                <li key={t}>
-                  <Link to="#" className="font-body text-sm text-muted-foreground hover:text-primary transition-colors block py-2 border-b border-border">
-                    {t}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </aside>
       </div>
     </section>
   </Layout>
