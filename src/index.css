@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -44,9 +44,6 @@
     --sidebar-accent-foreground: 0 0% 10%;
     --sidebar-border: 0 0% 91%;
     --sidebar-ring: 358 81% 51%;
-
-    --font-heading: 'Libre Baskerville', 'Cambria', Georgia, serif;
-    --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
   }
 }
 
@@ -57,19 +54,19 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-body);
+    font-family: 'Montserrat', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+    font-family: 'Montserrat', sans-serif;
   }
 }
 
 @layer utilities {
   .font-heading {
-    font-family: var(--font-heading);
+    font-family: 'Montserrat', sans-serif;
   }
   .font-body {
-    font-family: var(--font-body);
+    font-family: 'Montserrat', sans-serif;
   }
 }
