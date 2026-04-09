@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Leaf, Coffee, Wind, Snowflake, Filter, Zap } from "lucide-react";
 import Layout from "@/components/Layout";
 import heroImg from "@/assets/hero-coffee-field.jpg";
 import aboutImg from "@/assets/about-pourover.jpg";
@@ -7,14 +6,14 @@ import statsBg from "@/assets/stats-bg.jpg";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
+import catDripBag from "@/assets/cat-drip-bag.jpg";
+import catRoasted from "@/assets/cat-roasted.jpg";
+import catMenu from "@/assets/cat-menu.jpg";
 
-const categories = [
-  { icon: Leaf, title: "Cà phê nhân xanh", desc: "Green coffee beans" },
-  { icon: Coffee, title: "Cà phê hạt rang", desc: "Roasted coffee beans" },
-  { icon: Wind, title: "Cà phê bột", desc: "Ground coffee" },
-  { icon: Snowflake, title: "Cà phê ủ lạnh", desc: "Cold brew coffee" },
-  { icon: Filter, title: "Cà phê túi lọc", desc: "Drip-bag coffee" },
-  { icon: Zap, title: "Cà phê hoà tan", desc: "Instant coffee" },
+const productCategories = [
+  { img: catDripBag, label: "CUNG ỨNG", title: "Cà Phê Nhân cho\nNhà Rang Xay" },
+  { img: catRoasted, label: "CUNG CẤP", title: "Cà Phê Rang cho\nQuán, Chuỗi F&B" },
+  { img: catMenu, label: "SETUP & HUẤN LUYỆN", title: "Menu Thức Uống\nvà Vận Hành Quầy" },
 ];
 
 const stats = [
@@ -91,25 +90,36 @@ const Index = () => (
       </div>
     </section>
 
-    {/* Categories */}
-    <section className="py-20 bg-secondary">
+    {/* DANH MỤC SẢN PHẨM */}
+    <section className="py-20">
       <div className="container mx-auto px-4">
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-4">
+        <h2 className="font-heading text-2xl md:text-3xl font-bold text-center mb-12 uppercase tracking-wider">
           Danh mục sản phẩm
         </h2>
-        <p className="font-body text-muted-foreground text-center mb-12 max-w-lg mx-auto">
-          Đa dạng dòng sản phẩm cà phê chất lượng cao từ TOBE
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((cat) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {productCategories.map((cat) => (
             <Link
               key={cat.title}
               to="/product"
-              className="group bg-card rounded-sm p-8 text-center hover:shadow-lg transition-all duration-300 border border-border hover:border-primary/30"
+              className="group relative aspect-[4/3] overflow-hidden rounded-sm"
             >
-              <cat.icon className="mx-auto mb-4 text-primary" size={40} strokeWidth={1.5} />
-              <h3 className="font-heading text-lg font-bold mb-1">{cat.title}</h3>
-              <p className="font-body text-sm text-muted-foreground">{cat.desc}</p>
+              <img
+                src={cat.img}
+                alt={cat.title}
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                width={800}
+                height={700}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 z-10">
+                <p className="font-body text-xs font-semibold text-primary-foreground/70 uppercase tracking-widest mb-1">
+                  {cat.label}
+                </p>
+                <h3 className="font-heading text-lg md:text-xl font-bold text-primary-foreground leading-snug whitespace-pre-line">
+                  {cat.title}
+                </h3>
+              </div>
             </Link>
           ))}
         </div>
