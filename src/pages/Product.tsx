@@ -1,24 +1,28 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
+import productPulseBold from "@/assets/product-pulse-bold.jpg";
+import productPauseDrip from "@/assets/product-pause-drip.jpg";
+import productBrewBold from "@/assets/product-brew-bold.jpg";
+import productDripBag from "@/assets/product-drip-bag.jpg";
+import productPauseBox from "@/assets/product-pause-box.jpg";
+import productCore from "@/assets/product-core.jpg";
 
 const allCategories = [
   "Tất cả", "Cà phê nhân xanh", "Cà phê hạt rang", "Cà phê bột",
   "Cà phê ủ lạnh", "Cà phê túi lọc", "Cà phê hoà tan",
 ];
 
-const origins = ["Tất cả", "Buôn Ma Thuột", "Đà Lạt", "Sơn La"];
+const origins = ["Tất cả", "Buôn Ma Thuột", "Đà Lạt", "Sơn La", "Bảo Lộc"];
 
 const products = [
-  { id: 1, name: "Tobe Robusta Hạt Rang", category: "Cà phê hạt rang", origin: "Buôn Ma Thuột", price: 189000 },
-  { id: 2, name: "Tobe Arabica Đà Lạt", category: "Cà phê hạt rang", origin: "Đà Lạt", price: 245000 },
-  { id: 3, name: "Tobe Drip Bag - Hương Vị Đậm Đà", category: "Cà phê túi lọc", origin: "Buôn Ma Thuột", price: 120000 },
-  { id: 4, name: "Tobe Cold Brew Original", category: "Cà phê ủ lạnh", origin: "Buôn Ma Thuột", price: 85000 },
-  { id: 5, name: "Tobe Cà Phê Bột Truyền Thống", category: "Cà phê bột", origin: "Buôn Ma Thuột", price: 135000 },
-  { id: 6, name: "Tobe Instant Premium", category: "Cà phê hoà tan", origin: "Đà Lạt", price: 95000 },
-  { id: 7, name: "Tobe Green Bean Sơn La", category: "Cà phê nhân xanh", origin: "Sơn La", price: 320000 },
-  { id: 8, name: "Tobe Cold Brew Vanilla", category: "Cà phê ủ lạnh", origin: "Đà Lạt", price: 95000 },
-  { id: 9, name: "Tobe Drip Bag - Arabica Blend", category: "Cà phê túi lọc", origin: "Đà Lạt", price: 130000 },
+  { id: 1, name: "Tobe Pulse Bold", desc: "Signature Blend — Honey, Prunes, Vanilla, Chocolate", category: "Cà phê hạt rang", origin: "Bảo Lộc", price: 189000, img: productPulseBold },
+  { id: 2, name: "Tobe Flow", desc: "Everyday Blend — Vanilla, Raisins, Cognac, Chocolate", category: "Cà phê hạt rang", origin: "Bảo Lộc", price: 169000, img: productPulseBold },
+  { id: 3, name: "Tobe Pause - Drip Bag", desc: "Cà phê túi lọc tiện lợi — Thảnh thơi từng phút giây", category: "Cà phê túi lọc", origin: "Bảo Lộc", price: 120000, img: productPauseDrip },
+  { id: 4, name: "Tobe Brew Bold 500g", desc: "Cà phê hạt rang nguyên chất — 100% Coffee Viet Nam", category: "Cà phê hạt rang", origin: "Bảo Lộc", price: 210000, img: productBrewBold },
+  { id: 5, name: "Tobe Drip Bag", desc: "100% Coffee Viet Nam — Drip Bag tiện lợi", category: "Cà phê túi lọc", origin: "Bảo Lộc", price: 95000, img: productDripBag },
+  { id: 6, name: "Tobe Pause - Hộp Quà", desc: "Tobe Pause Thảnh Thơi — Brew Bold Be TOBE", category: "Cà phê túi lọc", origin: "Bảo Lộc", price: 250000, img: productPauseBox },
+  { id: 7, name: "Tobe Core", desc: "Cà phê hạt rang — Cold Brew, Pour Over, Pha Phin, Pha Máy", category: "Cà phê hạt rang", origin: "Bảo Lộc", price: 195000, img: productCore },
 ];
 
 const formatPrice = (p: number) => p.toLocaleString("vi-VN") + "₫";
@@ -86,12 +90,18 @@ const Product = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                 {filtered.map((p) => (
                   <div key={p.id} className="bg-card border border-border rounded-sm overflow-hidden group hover:shadow-lg transition-shadow">
-                    <div className="aspect-square bg-secondary flex items-center justify-center">
-                      <span className="font-heading text-4xl text-primary/30">TOBE</span>
+                    <div className="aspect-square bg-secondary overflow-hidden">
+                      <img
+                        src={p.img}
+                        alt={p.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
                     </div>
                     <div className="p-5">
                       <p className="font-body text-xs text-muted-foreground uppercase tracking-wider mb-1">{p.category}</p>
-                      <h3 className="font-heading text-base font-bold mb-2 leading-snug">{p.name}</h3>
+                      <h3 className="font-heading text-base font-bold mb-1 leading-snug">{p.name}</h3>
+                      <p className="font-body text-xs text-muted-foreground mb-3 line-clamp-2">{p.desc}</p>
                       <p className="font-body text-lg font-semibold text-primary mb-4">{formatPrice(p.price)}</p>
                       <Button className="w-full rounded-sm font-body uppercase tracking-wider text-xs">
                         Mua ngay
