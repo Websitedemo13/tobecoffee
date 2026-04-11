@@ -14,12 +14,12 @@ import productPauseBox from "@/assets/product-pause-box.jpg";
 import productCore from "@/assets/product-core.jpg";
 
 const productCategories = [
-  { img: productDripBag, label: "CÀ PHÊ TÚI LỌC", title: "Tobe Drip Bag\n100% Coffee Viet Nam" },
-  { img: productPulseBold, label: "CÀ PHÊ HẠT RANG", title: "Tobe Pulse Bold\nSignature Blend" },
-  { img: productCore, label: "CÀ PHÊ HẠT RANG", title: "Tobe Core\n250g Premium" },
-  { img: productPauseDrip, label: "CÀ PHÊ TÚI LỌC", title: "Tobe Pause\nThảnh Thơi Từng Phút Giây" },
-  { img: productBrewBold, label: "CÀ PHÊ HẠT RANG", title: "Tobe Brew Bold\n500g Nguyên Chất" },
-  { img: productPauseBox, label: "HỘP QUÀ", title: "Tobe Pause Hộp Quà\nBrew Bold Be TOBE" },
+  { img: productCore, label: "CÀ PHÊ NHÂN XANH", title: "Cà phê nhân xanh\nNguyên liệu chất lượng cao" },
+  { img: productPulseBold, label: "CÀ PHÊ HẠT RANG", title: "Cà phê hạt rang\nRang mộc nguyên chất" },
+  { img: productBrewBold, label: "CÀ PHÊ BỘT", title: "Cà phê bột\nXay mịn truyền thống" },
+  { img: productPauseDrip, label: "CÀ PHÊ Ủ LẠNH", title: "Cà phê ủ lạnh\nCold Brew đậm vị" },
+  { img: productDripBag, label: "CÀ PHÊ TÚI LỌC", title: "Cà phê túi lọc (Drip-bag)\nTiện lợi mọi lúc mọi nơi" },
+  { img: productPauseBox, label: "CÀ PHÊ HOÀ TAN", title: "Cà phê hoà tan\nNhanh chóng & thơm ngon" },
 ];
 
 const stats = [
