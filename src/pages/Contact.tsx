@@ -27,9 +27,9 @@ const Contact = () => {
           <div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
               {[
-                { icon: MapPin, label: "Địa chỉ", value: "TP. Hồ Chí Minh & Vũng Tàu" },
-                { icon: Phone, label: "Hotline", value: "0901 234 567" },
-                { icon: Mail, label: "Email", value: "hello@tobecoffee.vn" },
+                { icon: MapPin, label: "Địa chỉ", value: "Lô CN9 P, KCN, B'Lao, Lâm Đồng 66450, Việt Nam" },
+                { icon: Phone, label: "Hotline", value: "0909 806 947" },
+                { icon: Mail, label: "Email", value: "tobebaoloc@gmail.com" },
                 { icon: Clock, label: "Giờ làm việc", value: "T2 – T7: 8:00 – 18:00" },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-3">
@@ -86,7 +86,7 @@ const Contact = () => {
           <div className="rounded-sm overflow-hidden border border-border min-h-[400px]">
             <iframe
               title="TOBE Coffee Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4241674197115!2d106.69765!3d10.77639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQ2JzM1LjAiTiAxMDbCsDQxJzUxLjUiRQ!5e0!3m2!1svi!2svn!4v1700000000000"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.8!2d107.8112!3d11.5479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3173f7a!2sKCN+B%27Lao!5e0!3m2!1svi!2svn!4v1700000000000"
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: "500px" }}

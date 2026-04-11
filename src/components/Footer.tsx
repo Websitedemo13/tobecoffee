@@ -23,9 +23,9 @@ const Footer = () => (
       <div>
         <h4 className="font-heading text-lg font-bold text-primary-foreground mb-4">Liên hệ</h4>
         <ul className="space-y-3 font-body text-sm">
-          <li className="flex items-start gap-2"><MapPin size={16} className="text-primary mt-0.5 shrink-0" /> TOBE Baoloc Co., Ltd — TP. Bảo Lộc, Lâm Đồng, Việt Nam</li>
-          <li className="flex items-center gap-2"><Phone size={16} className="text-primary shrink-0" /> 0263 123 4567</li>
-          <li className="flex items-center gap-2"><Mail size={16} className="text-primary shrink-0" /> info@tobecoffee.vn</li>
+          <li className="flex items-start gap-2"><MapPin size={16} className="text-primary mt-0.5 shrink-0" /> Lô CN9 P, KCN, B'Lao, Lâm Đồng 66450, Việt Nam</li>
+          <li className="flex items-center gap-2"><Phone size={16} className="text-primary shrink-0" /> 0909 806 947</li>
+          <li className="flex items-center gap-2"><Mail size={16} className="text-primary shrink-0" /> tobebaoloc@gmail.com</li>
         </ul>
       </div>
       <div>
@@ -42,7 +42,7 @@ const Footer = () => (
       </div>
     </div>
     <div className="container mx-auto px-4 mt-12 pt-6 border-t border-primary-foreground/10 text-center font-body text-xs text-primary-foreground/50">
-      © 2026 TOBE Baoloc Co., Ltd. All rights reserved.
+      © 2026 Công ty TNHH TOBE Bảo Lộc. All rights reserved. | tobecoffee.vn
     </div>
   </footer>
 );
