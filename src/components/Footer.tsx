@@ -6,7 +6,7 @@ const Footer = () => (
   <footer className="bg-foreground text-primary-foreground/80 py-16">
     <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
       <div>
-        <img src={tobeLogo} alt="TOBE Coffee" className="h-16 w-auto mb-4 brightness-0 invert" />
+        <img src={tobeLogo} alt="TOBE Coffee" className="h-20 w-20 mb-4 brightness-0 invert" />
         <p className="font-body text-sm leading-relaxed">
           Khởi đầu cho mọi ý tưởng — TOBE mang đến hương vị cà phê đậm đà từ vùng nguyên liệu Lâm Đồng, Việt Nam.
         </p>
