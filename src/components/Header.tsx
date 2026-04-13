@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import tobeLogo from "@/assets/tobe-logo.png";
+import tobeLogo from "/thumbnails.jpg";
 
 const navLinks = [
   { to: "/", label: "Trang chủ" },
@@ -19,7 +19,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-foreground/90 backdrop-blur-md">
       <div className="container mx-auto flex items-center justify-between py-2 px-4">
         <Link to="/" className="flex items-center gap-2">
-          <img src={tobeLogo} alt="TOBE Coffee" className="h-20 md:h-20 w-auto" />
+          <img src={tobeLogo} alt="TOBE Coffee" className="h-10 md:h-10 w-auto" />
         </Link>
 
         {/* Desktop nav */}
