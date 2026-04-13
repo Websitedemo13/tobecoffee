@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Facebook, Instagram } from "lucide-react";
 
 const Footer = () => {
-  const tobeLogo = "/thumbnails.jpg"; // ✅ dùng public
+  const tobeLogo = "/logo.png"; // ✅ dùng public
 
   return (
     <footer className="bg-foreground text-primary-foreground/80 py-16">
