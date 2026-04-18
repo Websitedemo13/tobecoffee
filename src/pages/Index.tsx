@@ -37,17 +37,31 @@ const blogPosts = [
 const Index = () => (
   <Layout>
     {/* Hero */}
-    <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-      <img
-        src={heroImg}
-        alt="Cánh đồng cà phê Việt Nam"
-        className="absolute inset-0 w-full h-full object-cover"
-        width={1920}
-        height={1080}
-      />
-      
-      
-    </section>
+    <section className="relative h-[70vh] sm:h-[80vh] lg:h-[90vh] flex items-center justify-center overflow-hidden">
+  {/* Background Image */}
+  <img
+    src={heroImg}
+    alt="Cánh đồng cà phê Việt Nam"
+    className="
+      absolute inset-0 w-full h-full 
+      object-cover 
+      object-[center_30%] sm:object-center
+      scale-110 sm:scale-100
+    "
+    width={1920}
+    height={1080}
+    loading="eager"
+  />
+
+  {/* Overlay gradient cho dễ đọc */}
+  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+
+  {/* Content */}
+  <div className="relative z-10 text-center px-4 max-w-3xl">
+    
+    
+  </div>
+</section>
 
     {/* About - Split screen */}
     <section className="py-20">
