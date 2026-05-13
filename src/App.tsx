@@ -9,6 +9,12 @@ import Product from "./pages/Product";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Dashboard from "./pages/admin/Dashboard";
+import HomepageAdmin from "./pages/admin/HomepageAdmin";
+import AboutAdmin from "./pages/admin/AboutAdmin";
+import ProductsAdmin from "./pages/admin/ProductsAdmin";
+import BlogAdmin from "./pages/admin/BlogAdmin";
+import ContactAdmin from "./pages/admin/ContactAdmin";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +30,12 @@ const App = () => (
           <Route path="/product" element={<Product />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin/homepage" element={<HomepageAdmin />} />
+          <Route path="/admin/about" element={<AboutAdmin />} />
+          <Route path="/admin/products" element={<ProductsAdmin />} />
+          <Route path="/admin/blog" element={<BlogAdmin />} />
+          <Route path="/admin/contact" element={<ContactAdmin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
