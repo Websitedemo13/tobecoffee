@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
-import { getPageContent } from "@/lib/supabase";
+import { getPageContent, supabase } from "@/lib/supabase";
 import { ContactContent, defaultContactContent } from "@/lib/content";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, LucideIcon } from "lucide-react";
+import { toast } from "sonner";
+
+const iconMap: Record<string, LucideIcon> = {
+  "Địa chỉ": MapPin,
+  Hotline: Phone,
+  Email: Mail,
+  "Giờ làm việc": Clock,
+};
 
 const Contact = () => {
   const [contactContent, setContactContent] = useState<ContactContent>(defaultContactContent);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   useEffect(() => {
@@ -19,9 +28,16 @@ const Contact = () => {
     fetchContact();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất.");
+    setSubmitting(true);
+    const { error } = await supabase.from("contact_messages").insert({ form_data: form });
+    setSubmitting(false);
+    if (error) {
+      toast.error("Gửi thất bại, vui lòng thử lại.");
+      return;
+    }
+    toast.success("Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất.");
     setForm({ name: "", email: "", message: "" });
   };
 
@@ -37,13 +53,6 @@ const Contact = () => {
     );
   }
 
-  const iconMap: { [key: string]: React.ComponentType<{ size: number; className: string }> } = {
-    "Địa chỉ": MapPin,
-    "Hotline": Phone,
-    "Email": Mail,
-    "Giờ làm việc": Clock,
-  };
-
   return (
     <Layout>
       <section className="bg-foreground text-primary-foreground py-20">
@@ -55,7 +64,6 @@ const Contact = () => {
 
       <section className="py-16">
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left - Info + Form */}
           <div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
               {contactContent.info.map((item) => {
@@ -106,17 +114,16 @@ const Contact = () => {
                   placeholder="Nhập nội dung tin nhắn..."
                 />
               </div>
-              <Button type="submit" className="w-full sm:w-auto rounded-sm font-body uppercase tracking-wider text-xs px-8">
-                Gửi tin nhắn
+              <Button type="submit" disabled={submitting} className="w-full sm:w-auto rounded-sm font-body uppercase tracking-wider text-xs px-8">
+                {submitting ? "Đang gửi..." : "Gửi tin nhắn"}
               </Button>
             </form>
           </div>
 
-          {/* Right - Map */}
           <div className="rounded-sm overflow-hidden border border-border min-h-[400px]">
             <iframe
               title="TOBE Coffee Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.8!2d107.8112!3d11.5479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3173f7a!2sKCN+B%27Lao!5e0!3m2!1svi!2svn!4v1700000000000"
+              src={contactContent.mapEmbed || defaultContactContent.mapEmbed}
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: "500px" }}

@@ -1,20 +1,11 @@
-import { createClient } from "@supabase/supabase-js";
+// Single shared Supabase client (re-exported to avoid multiple GoTrue instances)
+import { supabase } from "@/integrations/supabase/client";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+export { supabase };
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error("Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY environment variables.");
-}
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    persistSession: true,
-    storage: typeof window === "undefined" ? undefined : window.localStorage,
-  },
-});
 /**
- * Lấy dữ liệu CMS của một trang cụ thể (Bọc try-catch an toàn)
+ * Lấy dữ liệu CMS của một trang cụ thể (bọc try-catch an toàn).
+ * Trả về fallback nếu không có dữ liệu hoặc lỗi.
  */
 export async function getPageContent<T>(pageName: string, fallback: T): Promise<T> {
   try {
@@ -22,36 +13,37 @@ export async function getPageContent<T>(pageName: string, fallback: T): Promise<
       .from("page_contents")
       .select("content")
       .eq("page", pageName)
-      .single();
+      .maybeSingle();
 
-    if (error || !data) {
-      console.warn(`[Supabase] Không tìm thấy trang ${pageName}, sử dụng dữ liệu mặc định.`);
+    if (error || !data || !data.content) {
       return fallback;
     }
     return data.content as T;
   } catch (err) {
-    console.error(`[Supabase Error] Lỗi fetch trang ${pageName}:`, err);
+    console.error(`[Supabase] Lỗi khi tải trang ${pageName}:`, err);
     return fallback;
   }
 }
 
 /**
- * Cập nhật dữ liệu cấu trúc JSONB từ Admin lên Supabase
+ * Lưu (upsert) dữ liệu nội dung trang lên Supabase.
  */
-export async function updatePageContent(pageName: string, content: any): Promise<boolean> {
+export async function updatePageContent(pageName: string, content: unknown): Promise<boolean> {
   try {
     const { error } = await supabase
       .from("page_contents")
-      .update({ content, updated_at: new Date().toISOString() })
-      .eq("page", pageName);
+      .upsert(
+        { page: pageName, content: content as never, updated_at: new Date().toISOString() },
+        { onConflict: "page" }
+      );
 
     if (error) {
-      console.error(`[Supabase Error] Không thể update dữ liệu trang ${pageName}:`, error.message);
+      console.error(`[Supabase] Không thể lưu trang ${pageName}:`, error.message);
       return false;
     }
     return true;
   } catch (err) {
-    console.error(`[Supabase Error] Lỗi hệ thống khi lưu trang ${pageName}:`, err);
+    console.error(`[Supabase] Lỗi hệ thống khi lưu trang ${pageName}:`, err);
     return false;
   }
 }

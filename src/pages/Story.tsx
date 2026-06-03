@@ -45,7 +45,8 @@ const Story = () => {
           <div className="relative">
             <span className="text-primary text-6xl font-serif absolute -top-4 -left-4">"</span>
             <p className="font-body text-lg md:text-xl text-muted-foreground italic leading-relaxed px-8">
-              Trở thành nhà cung ứng cà phê chất lượng tốt nhất và người đồng hành uy tín hàng đầu cho các đối tác là chuỗi và thương hiệu F&B tại Việt Nam.
+              {storyContent.goal ||
+                "Trở thành nhà cung ứng cà phê chất lượng tốt nhất và người đồng hành uy tín hàng đầu cho các đối tác là chuỗi và thương hiệu F&B tại Việt Nam."}
             </p>
             <span className="text-primary text-6xl font-serif absolute -bottom-8 -right-4">"</span>
           </div>

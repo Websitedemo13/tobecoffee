@@ -1,5 +1,7 @@
 //D:\JOBS\tobecoffee\src\lib\content.ts
 import heroImg from "@/assets/hero-coffee-field.jpg";
+import aboutImg from "@/assets/about-pourover.jpg";
+import statsBg from "@/assets/stats-bg.jpg";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
@@ -52,15 +54,26 @@ export type ProductItem = {
   imgUrl?: string;
 };
 
+export type AboutSection = {
+  label: string;
+  title: string;
+  body: string;
+  imageUrl?: string;
+};
+
 export type IndexContent = {
   hero: HeroSection;
+  about?: AboutSection;
   productCategories: ProductCategory[];
   stats: StatItem[];
+  statsImage?: string;
+  blogTitle?: string;
   blogPosts: BlogPost[];
 };
 
 export type StoryContent = {
   hero: HeroSection;
+  goal?: string;
   missions: { icon: string; title: string; desc: string }[];
   stats: StatItem[];
   services: { imgUrl?: string; label: string; title: string; desc: string }[];
@@ -80,6 +93,7 @@ export type BlogContent = {
 export type ContactContent = {
   hero: HeroSection;
   info: { label: string; value: string }[];
+  mapEmbed?: string;
 };
 
 export const allCategories = [
@@ -100,6 +114,14 @@ export const defaultIndexContent: IndexContent = {
     subtitle: "Đem tinh túy cà phê từ nông trại đến tay bạn",
     imageUrl: heroImg,
   },
+  about: {
+    label: "Về chúng tôi",
+    title: "Coffee Is In Our Blood!",
+    body: "Tại TOBE chúng tôi tập trung mọi nguồn lực và đam mê để hướng đến chế biến sâu cà phê Việt Nam.",
+    imageUrl: aboutImg,
+  },
+  statsImage: statsBg,
+  blogTitle: "Góc lắng đọng",
   productCategories: [
     { imgUrl: productCore, label: "CÀ PHÊ NHÂN XANH", title: "Cà phê nhân xanh\nNguyên liệu chất lượng cao" },
     { imgUrl: productPulseBold, label: "CÀ PHÊ HẠT RANG", title: "Cà phê hạt rang\nRang mộc nguyên chất" },
@@ -150,6 +172,7 @@ export const defaultStoryContent: StoryContent = {
     subtitle: "Brew Bold, Be TOBE",
     imageUrl: storyImg,
   },
+  goal: "Trở thành nhà cung ứng cà phê chất lượng tốt nhất và người đồng hành uy tín hàng đầu cho các đối tác là chuỗi và thương hiệu F&B tại Việt Nam.",
   missions: [
     {
       icon: "🌍",
@@ -321,6 +344,8 @@ export const defaultContactContent: ContactContent = {
     { label: "Email", value: "tobebaoloc@gmail.com" },
     { label: "Giờ làm việc", value: "T2 – T7: 8:00 – 18:00" },
   ],
+  mapEmbed:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.8!2d107.8112!3d11.5479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3173f7a!2sKCN+B%27Lao!5e0!3m2!1svi!2svn!4v1700000000000",
 };
 
 export const formatPrice = (price: number) => price.toLocaleString("vi-VN") + "₫";

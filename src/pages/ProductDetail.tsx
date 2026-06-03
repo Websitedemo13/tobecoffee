@@ -1,41 +1,41 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
-import {
-  defaultProductPageContent,
-  formatPrice,
-} from "@/lib/content";
-
-// Khai báo khóa lưu trữ nội bộ đồng bộ với Admin và Product list
-const STORAGE_KEYS = {
-  product: "tobe_product_content",
-};
-
-// Helper tải dữ liệu cục bộ an toàn với SSR
-function loadPersistedData<T>(key: string, fallback: T): T {
-  if (typeof window === "undefined") return fallback;
-  const saved = window.localStorage.getItem(key);
-  if (!saved) return fallback;
-  try {
-    return JSON.parse(saved) as T;
-  } catch {
-    return fallback;
-  }
-}
+import { getPageContent } from "@/lib/supabase";
+import { defaultProductPageContent, ProductPageContent } from "@/lib/content";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const productId = Number(id ?? "");
+  const [content, setContent] = useState<ProductPageContent>(defaultProductPageContent);
+  const [loading, setLoading] = useState(true);
 
-  // Tải nội dung trang sản phẩm chứa mảng products từ localStorage
-  const productPageContent = loadPersistedData(STORAGE_KEYS.product, defaultProductPageContent);
-  const products = productPageContent.products || [];
+  useEffect(() => {
+    getPageContent<ProductPageContent>("product", defaultProductPageContent).then((c) => {
+      setContent(c);
+      setLoading(false);
+    });
+  }, []);
 
-  // Tìm sản phẩm chính xác theo ID
-  const product = useMemo(() => {
-    return products.find((p) => p.id === productId) || null;
-  }, [productId, products]);
+  const products = content.products || [];
+  const product = useMemo(() => products.find((p) => p.id === productId) || null, [productId, products]);
+  const related = useMemo(
+    () => products.filter((p) => p.id !== productId && (!product || p.category === product.category)).slice(0, 3),
+    [products, productId, product]
+  );
+
+  if (loading) {
+    return (
+      <Layout>
+        <section className="py-24">
+          <div className="container mx-auto px-4 text-center">
+            <p className="text-muted-foreground">Đang tải sản phẩm...</p>
+          </div>
+        </section>
+      </Layout>
+    );
+  }
 
   if (!product) {
     return (
@@ -55,71 +55,81 @@ const ProductDetail = () => {
 
   return (
     <Layout>
-      <section className="bg-foreground text-primary-foreground py-20">
-        <div className="container mx-auto px-4 text-center">
-          <p className="font-body text-sm uppercase tracking-[0.3em] text-primary/80 mb-2">Sản phẩm</p>
-          <h1 className="font-heading text-4xl md:text-5xl font-bold">{product.name}</h1>
-          <p className="font-body text-primary-foreground/70 mt-4 max-w-2xl mx-auto">{product.desc}</p>
+      <section className="bg-foreground text-primary-foreground py-16">
+        <div className="container mx-auto px-4">
+          <nav className="text-sm text-primary-foreground/60 mb-4">
+            <Link to="/" className="hover:text-primary-foreground">Trang chủ</Link> /{" "}
+            <Link to="/product" className="hover:text-primary-foreground">Sản phẩm</Link> /{" "}
+            <span className="text-primary-foreground/90">{product.name}</span>
+          </nav>
         </div>
       </section>
 
       <section className="py-16">
-        <div className="container mx-auto px-4 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] items-start">
-          <div className="space-y-8">
-            <div className="rounded-3xl overflow-hidden bg-secondary shadow-sm">
-              <img 
-                src={product.imgUrl} // Khớp hoàn toàn với trường dữ liệu thực tế
-                alt={product.name} 
-                className="w-full object-cover" 
-                loading="lazy" 
-              />
-            </div>
-
-            <div className="rounded-3xl border border-border bg-card p-8 shadow-sm">
-              <h2 className="font-heading text-2xl font-bold mb-4">Mô tả chi tiết</h2>
-              <p className="font-body text-base leading-relaxed text-muted-foreground whitespace-pre-line">{product.details}</p>
-            </div>
+        <div className="container mx-auto px-4 grid gap-12 lg:grid-cols-2 items-start">
+          <div className="overflow-hidden rounded-3xl bg-secondary shadow-sm">
+            {product.imgUrl && <img src={product.imgUrl} alt={product.name} className="w-full object-cover" loading="lazy" />}
           </div>
 
-          <aside className="space-y-6">
-            <div className="rounded-3xl border border-border bg-card p-8 shadow-sm">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Giá</p>
-                  <p className="font-heading text-3xl font-bold mt-2">{formatPrice(product.price)}</p>
-                </div>
+          <div>
+            <p className="font-body text-xs uppercase tracking-[0.3em] text-primary mb-3">{product.category}</p>
+            <h1 className="font-heading text-3xl md:text-4xl font-bold mb-4">{product.name}</h1>
+            <p className="font-body text-lg text-muted-foreground mb-6">{product.desc}</p>
+
+            <div className="space-y-4 border-t border-border pt-6 mb-8">
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Danh mục</span>
+                <span className="font-medium">{product.category}</span>
               </div>
-              <div className="mt-8 space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Danh mục</p>
-                  <p className="font-medium mt-1">{product.category}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Xuất xứ</p>
-                  <p className="font-medium mt-1">{product.origin}</p>
-                </div>
-              </div>
-              <div className="mt-8 flex flex-col gap-3">
-                <Link to="/product">
-                  <Button variant="secondary" size="lg" className="w-full">
-                    Quay lại sản phẩm
-                  </Button>
-                </Link>
-                <Button size="lg" className="w-full" asChild>
-                  <a href="tel:0909806947">Liên hệ ngay</a>
-                </Button>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Xuất xứ</span>
+                <span className="font-medium">{product.origin}</span>
               </div>
             </div>
 
-            <div className="rounded-3xl border border-border bg-card p-8 shadow-sm">
-              <h3 className="font-heading text-lg font-semibold mb-3">Có thể bạn quan tâm</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Truy cập trang sản phẩm để xem thêm lựa chọn khác, cập nhật nhanh từ admin và điều chỉnh nội dung khi cần.
-              </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button size="lg" className="flex-1" asChild>
+                <a href="tel:0909806947">Liên hệ đặt hàng</a>
+              </Button>
+              <Button size="lg" variant="secondary" className="flex-1" asChild>
+                <Link to="/product">Quay lại</Link>
+              </Button>
             </div>
-          </aside>
+          </div>
         </div>
       </section>
+
+      {product.details && (
+        <section className="py-12 bg-secondary/40">
+          <div className="container mx-auto px-4 max-w-3xl">
+            <h2 className="font-heading text-2xl font-bold mb-4">Mô tả chi tiết</h2>
+            <p className="font-body text-base leading-relaxed text-muted-foreground whitespace-pre-line">{product.details}</p>
+          </div>
+        </section>
+      )}
+
+      {related.length > 0 && (
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <h2 className="font-heading text-2xl font-bold mb-8 text-center">Sản phẩm liên quan</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {related.map((p) => (
+                <Link key={p.id} to={`/product/${p.id}`} className="group bg-card border border-border rounded-sm overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="aspect-square bg-secondary overflow-hidden">
+                    {p.imgUrl && (
+                      <img src={p.imgUrl} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-heading text-base font-bold leading-snug">{p.name}</h3>
+                    <p className="font-body text-xs text-muted-foreground line-clamp-2 mt-1">{p.desc}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </Layout>
   );
 };
