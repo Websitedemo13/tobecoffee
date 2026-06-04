@@ -441,14 +441,35 @@ const Admin = () => {
             {/* MESSAGES */}
             {tab === "messages" && (
               <Card className="p-6">
-                <h2 className="mb-4 font-heading text-lg font-bold">Tin nhắn liên hệ ({messages.length})</h2>
+                <h2 className="mb-4 font-heading text-lg font-bold">
+                  Tin nhắn liên hệ ({messages.length})
+                  {unreadCount > 0 && <span className="ml-2 text-sm font-normal text-muted-foreground">— {unreadCount} chưa đọc</span>}
+                </h2>
                 {messages.length === 0 ? (
                   <p className="text-sm text-muted-foreground">Chưa có tin nhắn nào.</p>
                 ) : (
                   <div className="space-y-3">
                     {messages.map((m) => (
-                      <div key={m.id} className="rounded-md border border-border p-4">
-                        <p className="mb-2 text-xs text-muted-foreground">{new Date(m.created_at).toLocaleString("vi-VN")}</p>
+                      <div
+                        key={m.id}
+                        className={`rounded-md border p-4 transition-colors ${
+                          m.is_read ? "border-border bg-card" : "border-primary/40 bg-primary/5"
+                        }`}
+                      >
+                        <div className="mb-2 flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            {!m.is_read && <span className="h-2 w-2 rounded-full bg-primary" />}
+                            <p className="text-xs text-muted-foreground">{new Date(m.created_at).toLocaleString("vi-VN")}</p>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Button variant="ghost" size="sm" onClick={() => markRead(m.id, !m.is_read)} title={m.is_read ? "Đánh dấu chưa đọc" : "Đánh dấu đã đọc"}>
+                              {m.is_read ? <Mail className="h-4 w-4" /> : <MailOpen className="h-4 w-4" />}
+                            </Button>
+                            <Button variant="ghost" size="sm" onClick={() => deleteMessage(m.id)} title="Xoá">
+                              <Trash2 className="h-4 w-4 text-destructive" />
+                            </Button>
+                          </div>
+                        </div>
                         {Object.entries(m.form_data || {}).map(([k, v]) => (
                           <p key={k} className="text-sm">
                             <span className="font-semibold capitalize">{k}: </span>
