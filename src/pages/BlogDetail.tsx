@@ -118,7 +118,7 @@ const BlogDetail = () => {
               <h3 className="font-heading text-xl font-bold mb-4">Bài viết liên quan</h3>
               <div className="space-y-4">
                 {recommendations.map((item) => (
-                  <Link key={item.id} to={`/blog/${item.id}`} className="block rounded-3xl border border-border bg-background p-4 hover:border-primary hover:bg-primary/5 transition-colors">
+                  <Link key={item.id} to={`/blog/${itemPath(item)}`} className="block rounded-3xl border border-border bg-background p-4 hover:border-primary hover:bg-primary/5 transition-colors">
                     <p className="text-xs uppercase tracking-[0.24em] text-primary/80 mb-2">{item.topic}</p>
                     <h4 className="font-semibold text-lg leading-snug mb-2">{item.title}</h4>
                     <p className="text-sm text-muted-foreground line-clamp-2">{item.excerpt}</p>
