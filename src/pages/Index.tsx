@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { getPageContent } from "@/lib/supabase";
-import { IndexContent, defaultIndexContent } from "@/lib/content";
+import { IndexContent, defaultIndexContent, itemPath } from "@/lib/content";
 
 const Index = () => {
   const [content, setContent] = useState<IndexContent>(defaultIndexContent);
