@@ -84,7 +84,7 @@ const Blog = () => {
                 </div>
                 <div className="rounded-3xl border border-border bg-card p-6 shadow-sm space-y-4">
                   {sortedPosts.slice(0, 3).map((post) => (
-                    <Link key={post.id} to={`/blog/${post.id}`} className="block rounded-3xl border border-border bg-background p-4 hover:border-primary hover:bg-primary/5 transition">
+                    <Link key={post.id} to={`/blog/${itemPath(post)}`} className="block rounded-3xl border border-border bg-background p-4 hover:border-primary hover:bg-primary/5 transition">
                       <p className="text-xs uppercase tracking-[0.24em] text-primary/80 mb-2">{post.topic}</p>
                       <h3 className="font-semibold text-lg leading-snug">{post.title}</h3>
                       <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{post.excerpt}</p>
