@@ -355,3 +355,34 @@ export const formatPrice = (price: number) => price.toLocaleString("vi-VN") + "�
 export const getProductById = (products: ProductItem[], id: number) =>
   products.find((product) => product.id === id);
 
+/** Tạo slug thân thiện từ chuỗi tiếng Việt. */
+export const slugify = (input: string): string =>
+  (input || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/[\s-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+/** Tìm item theo slug hoặc theo id số (tương thích đường dẫn cũ). */
+export function findBySlugOrId<T extends { id: number; slug?: string }>(
+  items: T[],
+  param: string | undefined
+): T | null {
+  if (!param) return null;
+  const bySlug = items.find((it) => it.slug && it.slug === param);
+  if (bySlug) return bySlug;
+  const numeric = Number(param);
+  if (!Number.isNaN(numeric)) return items.find((it) => it.id === numeric) ?? null;
+  return null;
+}
+
+/** Đường dẫn ưu tiên slug, fallback về id. */
+export const itemPath = (item: { id: number; slug?: string }): string =>
+  item.slug && item.slug.length > 0 ? item.slug : String(item.id);
+
+
