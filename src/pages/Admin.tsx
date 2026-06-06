@@ -289,10 +289,11 @@ const Admin = () => {
                     })}
                     fields={[
                       { key: "title", label: "Tiêu đề", kind: "text" },
+                      { key: "slug", label: "Đường dẫn (slug)", kind: "slug", from: "title" },
                       { key: "topic", label: "Chủ đề", kind: "text" },
                       { key: "date", label: "Ngày (YYYY-MM-DD)", kind: "text" },
                       { key: "excerpt", label: "Tóm tắt", kind: "area" },
-                      { key: "body", label: "Nội dung", kind: "area" },
+                      { key: "body", label: "Nội dung", kind: "rich", folder: "blog" },
                       { key: "imgUrl", label: "Ảnh", kind: "image", folder: "blog" },
                     ]}
                   />
