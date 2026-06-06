@@ -66,7 +66,7 @@ const Blog = () => {
                         </div>
                         <h3 className="font-heading text-xl font-semibold mb-3 leading-snug">{post.title}</h3>
                         <p className="text-sm text-muted-foreground mb-5 line-clamp-3">{post.excerpt}</p>
-                        <Link to={`/blog/${post.id}`} className="inline-flex items-center text-sm font-semibold text-primary hover:underline">
+                        <Link to={`/blog/${itemPath(post)}`} className="inline-flex items-center text-sm font-semibold text-primary hover:underline">
                           Xem chi tiết →
                         </Link>
                       </div>
