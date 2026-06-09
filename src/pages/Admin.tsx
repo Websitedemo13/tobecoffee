@@ -357,7 +357,7 @@ const Admin = () => {
                       { key: "label", label: "Nhãn", kind: "text" },
                       { key: "title", label: "Tiêu đề", kind: "text" },
                       { key: "desc", label: "Mô tả", kind: "area" },
-                      { key: "imgUrl", label: "Ảnh", kind: "image", folder: "story" },
+                      { key: "imgUrl", label: "Ảnh", kind: "image", folder: "story", recommend: "800 x 600" },
                     ]}
                   />
                 </Card>
