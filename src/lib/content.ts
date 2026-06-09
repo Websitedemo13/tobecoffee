@@ -76,6 +76,7 @@ export type IndexContent = {
 export type StoryContent = {
   hero: HeroSection;
   goal?: string;
+  why?: { title?: string; body?: string };
   missions: { icon: string; title: string; desc: string }[];
   stats: StatItem[];
   services: { imgUrl?: string; label: string; title: string; desc: string }[];
