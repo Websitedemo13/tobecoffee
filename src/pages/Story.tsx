@@ -72,22 +72,29 @@ const Story = () => {
       {/* Split section - Image + stats */}
       <section className="py-20">
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="overflow-hidden rounded-sm">
-            <img
-              src={storyContent.hero.imageUrl || "https://via.placeholder.com/960x1280"}
-              alt="Thu hoạch cà phê"
-              className="w-full h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              loading="lazy"
-              width={960}
-              height={1280}
-            />
+          <div className="overflow-hidden rounded-sm bg-secondary">
+            {storyContent.hero.imageUrl ? (
+              <img
+                src={storyContent.hero.imageUrl}
+                alt={storyContent.why?.title || "Thu hoạch cà phê"}
+                className="w-full h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                loading="lazy"
+                width={960}
+                height={1280}
+              />
+            ) : (
+              <div className="w-full h-[500px] flex items-center justify-center text-muted-foreground text-sm">
+                Chưa có ảnh
+              </div>
+            )}
           </div>
           <div>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6 leading-tight">
-              Tại Sao Chọn <span className="text-primary">TOBE</span>?
+              {storyContent.why?.title || "Tại Sao Chọn TOBE?"}
             </h2>
             <p className="font-body text-muted-foreground leading-relaxed mb-6">
-              TOBE tập trung phát triển vùng canh tác và chuẩn hóa quy trình sản xuất để giới thiệu đến đối tác — khách hàng hương vị cà phê tuyệt vời đến từ nông trại Lâm Đồng.
+              {storyContent.why?.body ||
+                "TOBE tập trung phát triển vùng canh tác và chuẩn hóa quy trình sản xuất để giới thiệu đến đối tác — khách hàng hương vị cà phê tuyệt vời đến từ nông trại Lâm Đồng."}
             </p>
             <div className="grid grid-cols-2 gap-6">
               {storyContent.stats.map((s) => (
@@ -111,15 +118,21 @@ const Story = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {storyContent.services.map((s) => (
               <div key={s.title} className="bg-card border border-border rounded-sm overflow-hidden group">
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={s.imgUrl || "https://via.placeholder.com/800x600"}
-                    alt={s.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                    width={800}
-                    height={600}
-                  />
+                <div className="aspect-[4/3] overflow-hidden bg-secondary">
+                  {s.imgUrl ? (
+                    <img
+                      src={s.imgUrl}
+                      alt={s.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                      width={800}
+                      height={600}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-muted-foreground text-sm">
+                      Chưa có ảnh
+                    </div>
+                  )}
                 </div>
                 <div className="p-6">
                   <p className="font-body text-[10px] uppercase tracking-widest text-primary font-semibold mb-2">
