@@ -158,35 +158,8 @@ const Index = () => (
       </div>
     </section>
 
-    {/* Blog preview - Góc lắng đọng */}
-    <section className="py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-center text-primary mb-12 italic">
-          Góc lắng đọng
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {blogPosts.map((post) => (
-            <article key={post.title} className="group">
-              <div className="overflow-hidden mb-5">
-                <img
-                  src={post.img}
-                  alt={post.title}
-                  className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                  width={800}
-                  height={600}
-                />
-              </div>
-              <h3 className="font-heading text-lg font-bold mb-2 leading-snug">{post.title}</h3>
-              <p className="font-body text-sm text-muted-foreground mb-3 line-clamp-2">{post.excerpt}</p>
-              <Link to="/blog" className="font-body text-sm text-primary font-semibold hover:underline">
-                Đọc thêm →
-              </Link>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+    
+    
   </Layout>
 );
 
