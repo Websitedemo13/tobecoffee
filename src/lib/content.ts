@@ -317,7 +317,7 @@ export const defaultContactContent: ContactContent = {
   },
   info: [
     { label: "Địa chỉ", value: "Lô CN9 P, KCN, B'Lao, Lâm Đồng 66450, Việt Nam" },
-    { label: "Hotline", value: "0909 806 947" },
+    { label: "Hotline", value: "0969598892" },
     { label: "Email", value: "tobebaoloc@gmail.com" },
     { label: "Giờ làm việc", value: "T2 – T7: 8:00 – 18:00" },
   ],
