@@ -73,7 +73,7 @@ const Index = () => {
 
       {/* ABOUT */}
 
-      <section className="py-20">
+      <section className="py-5">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
 
           <img
