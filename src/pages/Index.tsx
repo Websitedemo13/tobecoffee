@@ -113,7 +113,7 @@ const Index = () => {
                 to="/story"
                 className="inline-flex bg-primary text-primary-foreground px-8 py-4 font-semibold"
               >
-                Xem thêm
+               
               </Link>
             </div>
           </div>
