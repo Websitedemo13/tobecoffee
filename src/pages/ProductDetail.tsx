@@ -230,10 +230,10 @@ const ProductDetail = () => {
 
             <div className="flex flex-col sm:flex-row gap-3">
               <Button size="lg" className="flex-1" asChild>
-                <a href="tel:0909806947">
+                <Link to="/contact">
                   <Phone className="mr-2 h-4 w-4" />
                   Liên hệ đặt hàng
-                </a>
+                </Link>
               </Button>
 
               <Button
