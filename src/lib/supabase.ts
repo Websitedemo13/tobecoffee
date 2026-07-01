@@ -56,7 +56,7 @@ export async function updatePageContent(
       .upsert(
         {
           page: pageName,
-          content,
+          content: content as never,
           updated_at: new Date().toISOString(),
         },
         {
