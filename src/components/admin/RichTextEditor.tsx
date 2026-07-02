@@ -133,13 +133,18 @@ export function RichTextEditor({ label, value, onChange, folder = "content", pla
 
   if (!editor) return null;
 
+  const plainText = editor.getText().trim();
+  const wordCount = plainText ? plainText.split(/\s+/).length : 0;
+  const charCount = plainText.length;
+
+
   return (
     <div className="space-y-1.5">
       {label && (
         <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{label}</Label>
       )}
       <div className="overflow-hidden rounded-lg border border-input bg-background shadow-sm focus-within:ring-1 focus-within:ring-ring">
-        <div className="flex flex-wrap items-center gap-0.5 border-b border-border bg-muted/40 px-2 py-1.5">
+        <div className="sticky top-0 z-10 flex flex-wrap items-center gap-0.5 border-b border-border bg-muted/60 px-2 py-1.5 backdrop-blur">
           <ToolbarButton title="Hoàn tác" onClick={() => editor.chain().focus().undo().run()} disabled={!editor.can().undo()}>
             <Undo2 className="h-4 w-4" />
           </ToolbarButton>
@@ -214,6 +219,10 @@ export function RichTextEditor({ label, value, onChange, folder = "content", pla
           </label>
         </div>
         <EditorContent editor={editor} />
+        <div className="flex items-center justify-between border-t border-border bg-muted/30 px-4 py-2 text-xs text-muted-foreground">
+          <span>{wordCount} từ · {charCount} ký tự</span>
+          <span>~{Math.max(1, Math.ceil(wordCount / 200))} phút đọc</span>
+        </div>
       </div>
     </div>
   );
