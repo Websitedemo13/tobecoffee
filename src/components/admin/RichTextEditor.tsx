@@ -133,6 +133,11 @@ export function RichTextEditor({ label, value, onChange, folder = "content", pla
 
   if (!editor) return null;
 
+  const plainText = editor.getText().trim();
+  const wordCount = plainText ? plainText.split(/\s+/).length : 0;
+  const charCount = plainText.length;
+
+
   return (
     <div className="space-y-1.5">
       {label && (
